@@ -1,0 +1,29 @@
+{
+  "name": "ftp_server",
+  "version": "1.0.0",
+  "description": "“FTP Server” that will be used for an Internet Service Provider (ISP). Normally, the ISP‟s try to facilitate their users by ftp servers, where several media contents are present to fulfill customer‟s needs.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozumder0204/FTP_Server.git"
+  },
+  "author": "Mozumder0204",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mozumder0204/FTP_Server/issues"
+  },
+  "homepage": "https://github.com/mozumder0204/FTP_Server#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+	"body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "date-time": "^3.0.0",
+    "ejs": "^2.6.1",
+    "express-session": "^1.15.6",
+    "multer": "^1.4.1",
+    "mysql": "^2.16.0"
+  }
+}

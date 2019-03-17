@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head><title> Registration | Online Exam Portal</title>
+<script type="text/javascript" src="/assets/signup/signup.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/signup/signup.css">
+</head>
+<body>
+<form method="POST" name="regF" enctype="multipart/form-data">
+
+	<span>Online Exam Portal</span>
+	<hr/>
+
+	<h1>CREATE NEW ACCOUNT</h1>
+	<br/>
+
+	<table  align="center" >
+	<tr>
+	<td>
+
+		Full Name &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
+		<input type ="text" name="fname" onkeyup="checkFN(this)" />
+		<div id="wrn1"></div>
+		<br/><br/>
+		
+		Email Address &nbsp&nbsp&nbsp&nbsp&nbsp:
+		<input type ="text" name="email" onkeyup="checkMAIL(this)" />
+		<div id="wrn2"></div>
+		<br/><br/>
+
+		
+		DOB &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
+        <input type="date" name="dob" min="1950-01-01" max="2019-12-31" required onkeyup="checkDOB(this)" >
+        <div id="wrn3"></div>
+		<br/><br/>
+		
+		Address &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
+		<input type ="text" name="address" onkeyup="checkAddress(this)" />
+		<div id="wrn4"></div>
+		<br/><br/>
+
+		Username &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
+		<input type ="text" name="uname" onkeyup="checkUN(this)" />
+		<div id="wrn6"></div>
+		<br/><br/>
+
+		Password &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
+		<input type ="password" name="pass" onkeyup="checkPASS(this)" />
+		<div id="wrn7"></div>
+		<br/><br/>
+		
+		Select an image&nbsp&nbsp&nbsp&nbsp :
+        <input type="file"  name="imageFile" accept="image/*" onchange="checkFile(this)">
+        <div id="wrn8"></div>
+		<br/><br/><br/>
+
+		<input type="submit" name="register" value="REGISTER" onclick = "return allOK();"  />
+
+		<h5 style="display:inline">Have already an account? <a href="/login" style="font-size:25px">Login</a>
+	
+		</h5>
+
+	</td>
+	</tr>
+	</table>
+
+</form>
+</body>
+</html>
