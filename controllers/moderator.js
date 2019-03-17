@@ -2,7 +2,8 @@ var express 		= require('express');
 var userModel 		= require.main.require('./model/user-model');
 var moderatorModel 	= require.main.require('./model/moderator-model');
 var memberModel 	= require.main.require('./model/member-model');
-var moderatorModel 	    = require.main.require('./model/moderator-model');
+var moderatorModel 	= require.main.require('./model/moderator-model');
+var requestModel	=require.main.require('./model/request-model');
 var router 			= express.Router();
 
 // ********************************************
@@ -121,9 +122,71 @@ router.post('/editPicture', (req, res)=>{
 	});
 });	
 // ********************************************
+// *************Request Box************************
+router.get('/requestBox', (req, res)=>{
 
+	requestModel.getAll(function(result){
+		if(result.length >0){
+			var results = {
+				qList : result
+			}
+			res.render('moderator/request', results);	
+		}else{
+			var results = {
+				qList : ""
+			}
+			res.render('moderator/request', results);	
+		}
+	});	
+});
 
+router.get('/requestBox/:id', (req, res)=>{
 
+	requestModel.delete(req.params.id,function(success){
+
+		if(success){
+			requestModel.getAll(function(result){
+				if(result.length >0){
+					var results = {
+						qList : result
+					}
+					res.render('moderator/request', results);	
+				}else{
+					var results = {
+						qList : ""
+					}
+					res.render('moderator/request', results);	
+				}
+			});	
+		 }
+		 else{
+			res.render('/admin');
+		}
+	});	
+});
+	
+// ********************************************
+// *************View Content*******************
+router.get('/viewContent', (req, res)=>{
+
+		res.render('moderator/viewContent');	
+	
+});
+// ********************************************
+// *************Upload Content*******************
+router.get('/uploadContent', (req, res)=>{
+
+	res.render('moderator/uploadContent');	
+
+});
+// ********************************************
+// *************Delete Content*******************
+router.get('/deleteContent', (req, res)=>{
+
+	res.render('moderator/deleteContent');	
+
+});
+// ********************************************
 
 module.exports = router;
 

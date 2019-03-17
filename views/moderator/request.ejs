@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head><title>Join Exam</title>
+
+<script type="text/javascript" src="/assets/admin/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/admin/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/admin/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/admin/profile.css">
+<link rel="stylesheet" type="text/css" href="/assets/admin/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/admin/dropdown.css">
+<link rel="stylesheet" type="text/css" href="/assets/admin/search.css">
+</head>
+<body>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li style="float:right"><a href="/logout">Log Out</a></li>
+        <li style="float:right"><a href="/moderator/profile">Profile</a></li>
+        <li style="float:right" ><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+        <li style="float:right"><a href="/moderator/requestBox">Request Box</a></li>
+        <li style="float:right">
+            <div class="dropdown">
+                <div class="dropbtn">Content</div>
+                <div class="dropdown-content">
+                    <a href="/moderator/viewContent">View Content</a>
+                    <a href="/moderator/uploadContent">Upload Content</a>
+                    <a href="/moderator/deleteContent">Delete Content</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+<form name="request">
+    <div class="container emp-profile" id='show'>
+    <table border="1" width="400px" class="table table-dark table-hover" >
+		<tr>
+			<th>Request ID</th>
+			<th>Request Time</th>
+            <th>Request Text</th>
+            <th>Action</th>
+		</tr>
+		<tr>
+        <% for(var i=0; i < qList.length; i++){ %>
+			<td><%=qList[i].R_ID%></td>
+            <td><%=qList[i].R_TIME%></td>
+            <td><%=qList[i].R_TEXT%></td>
+			<td>
+				<a href="/moderator/requestBox/<%=qList[i].R_ID%>">Delete</a> 
+           </td>
+         </tr>
+         <% } %>
+    </table>
+    
+</div>
+</form>
+</body>
+</html>

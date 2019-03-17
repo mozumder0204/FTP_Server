@@ -3,6 +3,7 @@ var userModel 		= require.main.require('./model/user-model');
 var moderatorModel 	= require.main.require('./model/moderator-model');
 var memberModel 	= require.main.require('./model/member-model');
 var adminModel 	    = require.main.require('./model/admin-model');
+var requestModel	=require.main.require('./model/request-model');
 var router 			= express.Router();
 
 // ********************************************
@@ -120,6 +121,84 @@ router.post('/editPicture', (req, res)=>{
 		}
 	});
 });	
+// ********************************************
+// *************Request Box************************
+router.get('/requestBox', (req, res)=>{
+
+	requestModel.getAll(function(result){
+		if(result.length >0){
+			var results = {
+				qList : result
+			}
+			res.render('admin/request', results);	
+		}else{
+			var results = {
+				qList : ""
+			}
+			res.render('admin/request', results);	
+		}
+	});	
+});
+
+router.get('/requestBox/:id', (req, res)=>{
+
+	requestModel.delete(req.params.id,function(success){
+
+		if(success){
+			requestModel.getAll(function(result){
+				if(result.length >0){
+					var results = {
+						qList : result
+					}
+					res.render('admin/request', results);	
+				}else{
+					var results = {
+						qList : ""
+					}
+					res.render('admin/request', results);	
+				}
+			});	
+		 }
+		 else{
+			res.render('/admin');
+		}
+	});	
+});
+// ********************************************
+// *************Add Moderator*******************
+router.get('/addModerator', (req, res)=>{
+
+	res.render('admin/addModerator');	
+	
+	});
+// ********************************************
+// *************Delete Moderator****************
+router.get('/deleteModerator', (req, res)=>{
+
+	res.render('admin/deleteModerator');	
+	
+});	
+// ********************************************
+// *************View Content*******************
+router.get('/viewContent', (req, res)=>{
+
+	res.render('admin/viewContent');	
+
+});
+// *******************************************
+// *************Upload Content****************
+router.get('/uploadContent', (req, res)=>{
+
+res.render('admin/uploadContent');	
+
+});
+// ********************************************
+// *************Delete Content*******************
+router.get('/deleteContent', (req, res)=>{
+
+res.render('admin/deleteContent');	
+
+});
 // ********************************************
 
 
