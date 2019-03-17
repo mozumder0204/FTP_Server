@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head><title>Home | Admin</title>
+
+<link rel="stylesheet" type="text/css" href="/assets/admin/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/admin/dropdown.css">
+
+</head>
+<body>
+<form name="adminHome">
+
+<ul>
+	<li><a href="/admin">Home</a></li>
+	<li style="float:right"><a href="/logout">Log Out</a></li>
+	<li style="float:right"><a href="/admin/profile">Profile</a></li>
+	<img src="<%=A_IMAGE%>" style="border-radius: 50%;width:50px;height:50px;float:right">
+	<li style="float:right" ><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+	<li style="float:right"><a href="/admin/requestBox">Request Box</a></li>
+	<li style="float:right">
+		<div class="dropdown">
+			<div class="dropbtn">Moderator</div>
+			<div class="dropdown-content">
+				<a href="/admin/addModerator">Add Moderator</a>
+				<a href="/admin/deleteModerator">Delete Moderator</a>
+			</div>
+		</div>
+	</li>
+	<li style="float:right">
+		<div class="dropdown">
+			<div class="dropbtn">Content</div>
+			<div class="dropdown-content">
+				<a href="/admin/viewContent">View Content</a>
+				<a href="/admin/uploadContent">Upload Content</a>
+				<a href="/admin/deleteContent">Delete Content</a>
+			</div>
+		</div>
+	</li>
+</ul>
+
+<div class="container-login100">
+	<h1>Welcome <%=A_NAME%></h1> 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+</body>
+</html>

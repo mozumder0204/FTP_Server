@@ -7,18 +7,18 @@ var multer 			= require('multer');
 var cookieParser 	= require('cookie-parser');
 var login			= require('./controllers/login');
 var signup			= require('./controllers/signup');
-var student			= require('./controllers/student');
-var teacher			= require('./controllers/teacher');
+var member			= require('./controllers/member');
+var moderator		= require('./controllers/moderator');
 var admin			= require('./controllers/admin');
 var logout			= require('./controllers/logout');
 var app  			= express();
-var port 			= 3000;
+var port 			= 2040;
 
 //CONFIGURATION
 app.set('view engine', 'ejs');
 
 //MIDDLEWARES
-app.use(exSession({secret: 'my top secret code', saveUninitialized: true, resave: false}));
+app.use(exSession({secret: 'No More Pera', saveUninitialized: true, resave: false}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 var storage = multer.diskStorage({
@@ -32,8 +32,8 @@ app.use(multer({
 }).single('imageFile'));
 app.use('/login', login);
 app.use('/signup', signup);
-app.use('/student', student);
-app.use('/teacher', teacher);
+app.use('/member', member);
+app.use('/moderator', moderator);
 app.use('/admin', admin);
 app.use('/logout', logout);
 app.use('/assets', express.static('ext'));
@@ -45,20 +45,20 @@ app.get('/', (req, res)=>{
 });
 
 
-app.get('/setCookie', (req,res)=>{
-	res.cookie('cookie1', 'first cookie');
-	res.send("done");
-});
+// app.get('/setCookie', (req,res)=>{
+// 	res.cookie('cookie1', 'first cookie');
+// 	res.send("done");
+// });
 
-app.get('/viewCookie', (req,res)=>{
-	res.send(req.cookies['cookie1']);
-});
+// app.get('/viewCookie', (req,res)=>{
+// 	res.send(req.cookies['cookie1']);
+// });
 
-app.get('/rmCookie', (req,res)=>{
-	res.clearCookie('cookie1');
-	res.send('Done');
-});
+// app.get('/rmCookie', (req,res)=>{
+// 	res.clearCookie('cookie1');
+// 	res.send('Done');
+// });
 
 
 //SERVER STARTUP
-app.listen(port, ()=>console.log('server started at '+port+" ..."));
+app.listen(port, ()=>console.log('Server running on port '+port+" ..."));

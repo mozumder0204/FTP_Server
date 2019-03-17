@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head><title>Edit Profile | mODERATOR</title>
+
+<script type="text/javascript" src="/assets/moderator/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/moderator/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/moderator/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/moderator/profile.css">
+<link rel="stylesheet" type="text/css" href="/assets/moderator/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/moderator/dropdown.css">
+
+</head>
+<body>
+
+<ul>
+    <li><a href="/moderator">Home</a></li>
+    <li style="float:right"><a href="/logout">Log Out</a></li>
+    <li style="float:right"><a href="/moderator/profile">Profile</a></li>
+    <img src="<%=M_IMAGE%>" style="border-radius: 50%;width:50px;height:50px;float:right">
+</ul>
+
+<div class="container emp-profile">
+<form name="moderatorSupport" method="POST" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-md-4">
+</div>
+    <div class="col-md-6">
+        <div class="profile-head">
+            <h5>
+                <%=M_NAME%>
+            </h5>
+            <h6>
+                Moderator
+            </h6>          
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+<div class="col-md-4">
+    <div class="profile-img">
+        <img src="<%=M_IMAGE%>" alt="image" title="myPicture" />
+    </div>
+</div>
+<div class="col-md-3">
+        <br><br><br>
+        <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>User Id</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><%=M_ID%></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-md-6">
+                            <p><input type="text" name="moderatorName" value="<%=M_NAME%>"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                            <p><input type="text" name="moderatorEmail" value="<%=M_EMAIL%>"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Mobile</label>
+                            </div>
+                            <div class="col-md-6">
+                            <p><input type="text" name="moderatorMobile" value="<%=M_MOBILE%>"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-6">
+                            <p><input type="text" name="moderatorAddress" value="<%=M_ADDRESS%>"></p>
+                            </div>
+                            </div>
+                            <br><br>
+                            <input type="submit" class="login100-form-btn" name="update" value="Update"/>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+<div class="col-md-4">
+    <div class="profile-work">
+        <p>Setting</p>
+        <a href="/moderator/editProfile">Edit Profile</a><br/>
+        <a href="/moderator/editPicture">Edit Picture</a><br/>
+        <a href="/moderator/changePassword">Change Password</a><br/>
+    </div>
+</div>
+
+</div>
+</form>           
+</div>
+
+
+
+</body>
+</html>

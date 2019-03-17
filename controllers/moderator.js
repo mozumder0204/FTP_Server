@@ -2,7 +2,7 @@ var express 		= require('express');
 var userModel 		= require.main.require('./model/user-model');
 var moderatorModel 	= require.main.require('./model/moderator-model');
 var memberModel 	= require.main.require('./model/member-model');
-var adminModel 	    = require.main.require('./model/admin-model');
+var moderatorModel 	    = require.main.require('./model/moderator-model');
 var router 			= express.Router();
 
 // ********************************************
@@ -20,24 +20,24 @@ router.get('/', (req, res)=>{
     var user = {
         userId: req.session.uId
     };
-    adminModel.get(req.session.uId, function(result){
-		res.render('admin/index', result[0]);	
+    moderatorModel.get(req.session.uId, function(result){
+		res.render('moderator/index', result[0]);	
 	});	
 });	
 //********************************************
 // *************Profile************************
 router.get('/profile', (req, res)=>{
 
-	adminModel.get(req.session.uId, function(result){
-		res.render('admin/profile', result[0]);	
+	moderatorModel.get(req.session.uId, function(result){
+		res.render('moderator/profile', result[0]);	
 	});	
 });
 
 // ********************************************
 // *************Change Password************************
 router.get('/changePassword', (req, res)=>{
-	adminModel.get(req.session.uId, function(result){
-		res.render('admin/changePassword', result[0]);	
+	moderatorModel.get(req.session.uId, function(result){
+		res.render('moderator/changePassword', result[0]);	
 	});	
 });
 
@@ -49,26 +49,26 @@ router.post('/changePassword', (req, res)=>{
 
 	userModel.validate(user, function(result){
 		if(result.length > 0){
-			if(result[0].U_TYPE == "ADMIN" && result[0].STATUS == "ACTIVE")
+			if(result[0].U_TYPE == "MODERATOR" && result[0].STATUS == "ACTIVE")
 			{
 				if(req.body.newPassword == req.body.conPassword){
 					var updateUser={
 						userId : req.session.uId,
 						password : req.body.newPassword,
-						type : "ADMIN",
+						type : "MODERATOR",
 						status : "ACTIVE"
                     };
 					userModel.update(updateUser, function(success){
 						if(success){
 							res.redirect('/logout');
 						}else{
-							res.redirect("/admin/changePassword");
+							res.redirect("/moderator/changePassword");
 						}
 					});
 				}
 			}
 		}else{
-			res.redirect("/admin/changePassword");
+			res.redirect("/moderator/changePassword");
 		}
 	});
 });	
@@ -76,26 +76,26 @@ router.post('/changePassword', (req, res)=>{
 // *************Edit Profile************************
 router.get('/editProfile', (req, res)=>{
 
-	adminModel.get(req.session.uId, function(result){
-		res.render('admin/editProfile', result[0]);	
+	moderatorModel.get(req.session.uId, function(result){
+		res.render('moderator/editProfile', result[0]);	
 	});	
 });
 
 router.post('/editProfile', (req, res)=>{
 	var update ={
-		adminId 		: req.session.uId,
-		adminName 	    : req.body.adminName,
-		adminEmail 	    : req.body.adminEmail,
-		adminMobile 	: req.body.adminMobile,
-		adminAddress	: req.body.adminAddress,
+		moderatorId 		: req.session.uId,
+		moderatorName 	    : req.body.moderatorName,
+		moderatorEmail 	    : req.body.moderatorEmail,
+		moderatorMobile 	: req.body.moderatorMobile,
+		moderatorAddress	: req.body.moderatorAddress,
 	};
-	adminModel.update(update, function(success){
+	moderatorModel.update(update, function(success){
 		if(success){
-			adminModel.get(req.session.uId, function(result){
-				res.redirect('/admin/profile');	
+			moderatorModel.get(req.session.uId, function(result){
+				res.redirect('/moderator/profile');	
 			});	
 		}else{
-			res.redirect('/admin/editProfile');
+			res.redirect('/moderator/editProfile');
 		}
 	});
 });	
@@ -103,34 +103,24 @@ router.post('/editProfile', (req, res)=>{
 // *************Edit Picture************************
 router.get('/editPicture', (req, res)=>{
 
-	adminModel.get(req.session.uId, function(result){
-		res.render('admin/editPicture', result[0]);	
+	moderatorModel.get(req.session.uId, function(result){
+		res.render('moderator/editPicture', result[0]);	
 	});	
 });
 router.post('/editPicture', (req, res)=>{
 	var update2 ={
-		adminId 		: req.session.uId,
-		adminImage	    :"/pictures/" + res.req.file.filename
+		moderatorId 		: req.session.uId,
+		moderatorImage	    :"/pictures/" + res.req.file.filename
 	};
-	adminModel.pictureedit(update2, function(success){
+	moderatorModel.pictureedit(update2, function(success){
 		if(success){
-			res.redirect('/admin/profile');
+			res.redirect('/moderator/profile');
 		}else{
-			res.redirect('/admin/editPicture');
+			res.redirect('/moderator/editPicture');
 		}
 	});
 });	
 // ********************************************
-
-
-
-
-
-
-
-
-
-
 
 
 
