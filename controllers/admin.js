@@ -5,6 +5,9 @@ var memberModel 	= require.main.require('./model/member-model');
 var adminModel 	    = require.main.require('./model/admin-model');
 var requestModel	=require.main.require('./model/request-model');
 var router 			= express.Router();
+var formidable	    = require('formidable');
+var fs 				= require('fs');
+var path			= require('path');
 
 // ********************************************
 // *************Index************************
@@ -297,7 +300,14 @@ router.get('/addAdmin/:id', (req, res)=>{
 // *************View Content*******************
 router.get('/viewContent', (req, res)=>{
 
-	res.render('admin/viewContent');	
+	fs.readdir('./data/', function(err, items) {
+		Object.assign({}, items);
+		var item={
+			qList:items
+		}
+		res.render('admin/viewContent' , item);
+
+	});
 
 });
 // *******************************************
@@ -308,21 +318,41 @@ res.render('admin/uploadContent');
 
 router.post('/uploadContent', (req, res)=>{
 
-
-	var info={
-
-		F_NAME 		: req.body.names+res.req.file.ext,
-		CATEGORY	: req.body.categories,
-		F_LOCATION	: "/content/"+req.body.names+res.req.file.ext
-	}	
-	console.log(info);
+		var form = new formidable.IncomingForm();
+		form.parse(req);
+		form.on('fileBegin', function (name, file){
+			file.path = path.join(__dirname, '../data/', file.name)
+		});
+		form.on('file', function (name, file){
+			console.log('Uploaded ' + file.name);
+		});
+		res.redirect('/admin');
+		
 	});
 
 // ********************************************
 // *************Delete Content*******************
 router.get('/deleteContent', (req, res)=>{
 
-res.render('admin/deleteContent');	
+	fs.readdir('./data/', function(err, items) {
+		Object.assign({}, items);
+		var item={
+			qList:items
+		}
+		res.render('admin/deleteContent' , item);
+	});
+});
+
+router.get('/deleteContent/:name', (req, res)=>{
+
+	fs.unlinkSync('./data/'+req.params.name);
+	fs.readdir('./data/', function(err, items) {
+		Object.assign({}, items);
+		var item={
+			qList:items
+		}
+		res.render('admin/deleteContent' , item);
+	});
 
 });
 // ********************************************
@@ -334,7 +364,7 @@ res.render('admin/deleteContent');
 
 
 
-
+	
 
 
 

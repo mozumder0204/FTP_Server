@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head><title>Mozumder FTP Server</title>
+<head><title>Contents</title>
 
-    <link rel="stylesheet" type="text/css" href="/assets/landingPage/landingPage.css">
+<script type="text/javascript" src="/assets/admin/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/admin/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/admin/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/admin/profile.css">
+<link rel="stylesheet" type="text/css" href="/assets/admin/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/admin/dropdown.css">
 
 </head>
 <body>
-<form name="browsePage" >
 
-<div id="container1">
-	<ol>
-		<img src="/assets/landingPage/test.png" class="logo" alt="" title=""/>
-		<a href="/">Home</a>
-		<a href="/member" >Browse</a>
-		<a href="/member" >Download</a>
-		<a>Request</a>
-	</ol>
-</div>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li style="float:right"><a href="/member" >Browse</a></li>
+    <li style="float:right"><a href="/member" >Download</a></li>
+    <li style="float:right" ><a href="/member/request">Request</a></li>
+</ul>
 
+<div class="container emp-profile">
+<form name="browse" method="POST">
 
+    <h1 align:middle>Contents</h1>
+    <br>
 
+    <% for(var i=0; i < qList.length; i++){ %>
 
+        <div style="text-align: center">
+        <a href="#"><%=qList[i]%></a>
+        </div> 
+        <br>
+    <% } %>
 
-
-
-
-
-
-	
-
-
-
+    
 </form>
 </body>
 </html>

@@ -4,6 +4,8 @@ var bodyParser 		= require('body-parser');
 var exSession 		= require('express-session');
 var path			= require('path');
 var multer 			= require('multer');
+var formidable 		= require('formidable');
+var fs 				= require('fs');
 var cookieParser 	= require('cookie-parser');
 var login			= require('./controllers/login');
 var signup			= require('./controllers/signup');
@@ -22,28 +24,15 @@ app.use(exSession({secret: 'No More Pera', saveUninitialized: true, resave: fals
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
-var storage = multer.diskStorage({
-	destination: "./images/",
-	filename   : function(req,file,cb){
-		cb(null , "image_"+Date.now()+path.extname(file.originalname));
-	}
-});
-app.use(multer({
-	storage:storage
-}).single('imageFile'));
-
-
-// var storage2 = multer.diskStorage({
-// 	destination: "./data/",
+// var storage = multer.diskStorage({
+// 	destination: "./images/",
 // 	filename   : function(req,file,cb){
 // 		cb(null , "image_"+Date.now()+path.extname(file.originalname));
 // 	}
 // });
 // app.use(multer({
-// 	storage:storage2
+// 	storage:storage
 // }).single('imageFile'));
-
-
 
 app.use('/login', login);
 app.use('/signup', signup);

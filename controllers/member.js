@@ -15,27 +15,13 @@ var path = require('path');
 router.get('/', (req, res)=>{
 
 
- 
-//joining path of directory 
-const directoryPath = path.join('./data');
-//passsing directoryPath and callback function
-fs.readdir(directoryPath, function (err, files) {
-    //handling error
-    if (err) {
-        return console.log('Unable to scan directory: ' + err);
-    } 
-    //listing all files using forEach
-    files.forEach(function (file) {
-        // Do whatever you want to do with the file
-        console.log(file); 
- 
-        //res.render('member/index' , file);
-
-    });
-});
-
-
-		//res.render('member/index');	
+    fs.readdir('./data/', function(err, items) {
+		Object.assign({}, items);
+		var item={
+			qList:items
+		}
+		res.render('member/index' , item);
+	});
 });	
 //********************************************
 // *************Request************************

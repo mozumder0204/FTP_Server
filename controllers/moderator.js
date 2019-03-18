@@ -5,6 +5,9 @@ var memberModel 	= require.main.require('./model/member-model');
 var moderatorModel 	= require.main.require('./model/moderator-model');
 var requestModel	=require.main.require('./model/request-model');
 var router 			= express.Router();
+var formidable	    = require('formidable');
+var fs 				= require('fs');
+var path			= require('path');
 
 // ********************************************
 // *************Index************************
@@ -160,7 +163,7 @@ router.get('/requestBox/:id', (req, res)=>{
 			});	
 		 }
 		 else{
-			res.render('/admin');
+			res.render('/moderator');
 		}
 	});	
 });
@@ -169,21 +172,59 @@ router.get('/requestBox/:id', (req, res)=>{
 // *************View Content*******************
 router.get('/viewContent', (req, res)=>{
 
-		res.render('moderator/viewContent');	
-	
+	fs.readdir('./data/', function(err, items) {
+		console.log(items);
+		Object.assign({}, items);
+		var item={
+			qList:items
+		}
+		res.render('moderator/viewContent' , item);
+
+	});
+
 });
 // ********************************************
 // *************Upload Content*******************
 router.get('/uploadContent', (req, res)=>{
-
 	res.render('moderator/uploadContent');	
+	});
+	
+router.post('/uploadContent', (req, res)=>{
 
-});
+		var form = new formidable.IncomingForm();
+		form.parse(req);
+		form.on('fileBegin', function (name, file){
+			file.path = path.join(__dirname, '../data/', file.name)
+		});
+		form.on('file', function (name, file){
+			console.log('Uploaded ' + file.name);
+		});
+		res.redirect('/moderator');
+		
+	});
 // ********************************************
 // *************Delete Content*******************
 router.get('/deleteContent', (req, res)=>{
 
-	res.render('moderator/deleteContent');	
+	fs.readdir('./data/', function(err, items) {
+		Object.assign({}, items);
+		var item={
+			qList:items
+		}
+		res.render('moderator/deleteContent' , item);
+	});
+});
+
+router.get('/deleteContent/:name', (req, res)=>{
+
+	fs.unlinkSync('./data/'+req.params.name);
+	fs.readdir('./data/', function(err, items) {
+		Object.assign({}, items);
+		var item={
+			qList:items
+		}
+		res.render('moderator/deleteContent' , item);
+	});
 
 });
 // ********************************************
