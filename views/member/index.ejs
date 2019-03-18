@@ -23,12 +23,13 @@
 <form name="browse" method="POST">
 
     <h1 align:middle>Contents</h1>
+    <h5 align='center'>😍 Click to download 😎</h5>
     <br>
 
     <% for(var i=0; i < qList.length; i++){ %>
 
         <div style="text-align: center">
-        <a href="#"><%=qList[i]%></a>
+        <a href="/member/download/<%=qList[i]%>"><%=qList[i]%></a>
         </div> 
         <br>
     <% } %>

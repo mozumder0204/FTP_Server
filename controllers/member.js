@@ -5,8 +5,9 @@ var memberModel 	= require.main.require('./model/member-model');
 var adminModel 	    = require.main.require('./model/admin-model');
 var requestModel 	= require.main.require('./model/request-model');
 var router 			= express.Router();
-var fs = require('fs');
-var path = require('path');
+var fs              = require('fs');
+var path            = require('path');
+var http            = require('http');
 
 
 // ********************************************
@@ -44,8 +45,24 @@ router.post('/request', (req, res)=>{
     });
 });	
 //********************************************
+// *************Download************************
+router.get('/download/:name', (req, res)=>{
+    
+    var file = './data/' + req.params.name;
+
+    var filename = path.basename(file);
+
+  
+    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+
+  
+    var filestream = fs.createReadStream(file);
+    filestream.pipe(res);
+});
 
 
+
+//********************************************
 
 
 
