@@ -18,6 +18,7 @@
         <li style="float:right"><a href="/moderator/profile">Profile</a></li>
         <li style="float:right" ><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
         <li style="float:right"><a href="/admin/requestBox">Request Box</a></li>
+        <li style="float:right"><a href="/admin/addAdmin">Admin List</a></li>
         <li style="float:right">
             <div class="dropdown">
                 <div class="dropbtn">Moderator</div>
@@ -43,6 +44,25 @@
 <form name="adminSupport" method="POST">
 
     <h1 align:middle>Delete Moderator</h1>
+
+    <table border="1" width="400px" class="table table-dark table-hover" >
+		<tr>
+			<th>User ID</th>
+			<th>User Type</th>
+            <th>Status</th>
+            <th>Action</th>
+		</tr>
+		<tr>
+        <% for(var i=0; i < qList.length; i++){ %>
+			<td><%=qList[i].U_ID%></td>
+            <td><%=qList[i].U_TYPE%></td>
+            <td><%=qList[i].STATUS%></td>
+			<td>
+				<a href="/admin/deleteModerator/<%=qList[i].U_ID%>">DELETE</a> 
+           </td>
+         </tr>
+         <% } %>
+    </table>
 
 </form>
 </body>

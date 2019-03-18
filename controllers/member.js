@@ -5,25 +5,37 @@ var memberModel 	= require.main.require('./model/member-model');
 var adminModel 	    = require.main.require('./model/admin-model');
 var requestModel 	= require.main.require('./model/request-model');
 var router 			= express.Router();
-var Client          = require('ftp');
+var fs = require('fs');
+var path = require('path');
+
 
 // ********************************************
 // *************Index************************
 
 router.get('/', (req, res)=>{
 
-    // var c = new Client();
-    // c.on('ready', function() {
-    //   c.list(function(err, list) {
-    //     if (err) throw err;
-    //     console.dir(list);
-    //     c.end();
-    //   });
-    // });
-    // // connect to localhost:21 as anonymous
-    // c.connect();
 
-		res.render('member/index');	
+ 
+//joining path of directory 
+const directoryPath = path.join('./data');
+//passsing directoryPath and callback function
+fs.readdir(directoryPath, function (err, files) {
+    //handling error
+    if (err) {
+        return console.log('Unable to scan directory: ' + err);
+    } 
+    //listing all files using forEach
+    files.forEach(function (file) {
+        // Do whatever you want to do with the file
+        console.log(file); 
+ 
+        //res.render('member/index' , file);
+
+    });
+});
+
+
+		//res.render('member/index');	
 });	
 //********************************************
 // *************Request************************

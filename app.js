@@ -21,6 +21,7 @@ app.set('view engine', 'ejs');
 app.use(exSession({secret: 'No More Pera', saveUninitialized: true, resave: false}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+
 var storage = multer.diskStorage({
 	destination: "./images/",
 	filename   : function(req,file,cb){
@@ -30,6 +31,20 @@ var storage = multer.diskStorage({
 app.use(multer({
 	storage:storage
 }).single('imageFile'));
+
+
+// var storage2 = multer.diskStorage({
+// 	destination: "./data/",
+// 	filename   : function(req,file,cb){
+// 		cb(null , "image_"+Date.now()+path.extname(file.originalname));
+// 	}
+// });
+// app.use(multer({
+// 	storage:storage2
+// }).single('imageFile'));
+
+
+
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/member', member);
@@ -38,6 +53,8 @@ app.use('/admin', admin);
 app.use('/logout', logout);
 app.use('/assets', express.static('ext'));
 app.use('/pictures', express.static('images'));
+app.use('/content', express.static('data'));
+app.use('/', express.static('data'));
 
 //ROUTES
 app.get('/', (req, res)=>{

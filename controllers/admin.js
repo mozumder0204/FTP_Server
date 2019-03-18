@@ -167,17 +167,132 @@ router.get('/requestBox/:id', (req, res)=>{
 // ********************************************
 // *************Add Moderator*******************
 router.get('/addModerator', (req, res)=>{
-
-	res.render('admin/addModerator');	
+	userModel.getModerator(function(result){
+		if(result.length >0){
+			var results = {
+				qList : result
+			}
+			res.render('admin/addModerator', results);	
+		}else{
+			var results = {
+				qList : ""
+			}
+			res.render('admin/addModerator', results);	
+		}
+	});	
 	
+});
+
+router.get('/addModerator/:id', (req, res)=>{
+
+	userModel.updatestatus(req.params.id, function(success){
+		if(success){
+			userModel.getModerator(function(result){
+				if(result.length >0){
+					var results = {
+						qList : result
+					}
+					res.render('admin/addModerator', results);	
+				}else{
+					var results = {
+						qList : ""
+					}
+					res.render('admin/addModerator', results);	
+				}
+			});	
+		}else{
+			res.redirect('/admin/addModerator');
+		}
 	});
+	
+});
+
 // ********************************************
 // *************Delete Moderator****************
-router.get('/deleteModerator', (req, res)=>{
 
-	res.render('admin/deleteModerator');	
+router.get('/deleteModerator', (req, res)=>{
+	userModel.getAllModerator(function(result){
+		if(result.length >0){
+			var results = {
+				qList : result
+			}
+			res.render('admin/deleteModerator', results);	
+		}else{
+			var results = {
+				qList : ""
+			}
+			res.render('admin/deleteModerator', results);	
+		}
+	});	
 	
-});	
+});
+router.get('/deleteModerator/:id', (req, res)=>{
+
+	userModel.delete(req.params.id, function(success){
+		if(success){
+			userModel.getAllModerator(function(result){
+				if(result.length >0){
+					var results = {
+						qList : result
+					}
+					res.render('admin/deleteModerator', results);	
+				}else{
+					var results = {
+						qList : ""
+					}
+					res.render('admin/deleteModerator', results);	
+				}
+			});	
+		}else{
+			res.redirect('/admin/deleteModerator');
+		}
+	});
+	
+});
+// ********************************************
+// ********************************************
+// *************Add ADMIN*******************
+router.get('/addAdmin', (req, res)=>{
+	userModel.getAdmin(function(result){
+		if(result.length >0){
+			var results = {
+				qList : result
+			}
+			res.render('admin/addAdmin', results);	
+		}else{
+			var results = {
+				qList : ""
+			}
+			res.render('admin/addAdmin', results);	
+		}
+	});	
+	
+});
+
+router.get('/addAdmin/:id', (req, res)=>{
+
+	userModel.updatestatus(req.params.id, function(success){
+		if(success){
+			userModel.getModerator(function(result){
+				if(result.length >0){
+					var results = {
+						qList : result
+					}
+					res.render('admin/addAdmin', results);	
+				}else{
+					var results = {
+						qList : ""
+					}
+					res.render('admin/addAdmin', results);	
+				}
+			});	
+		}else{
+			res.redirect('/admin/addAdmin');
+		}
+	});
+	
+});
+
 // ********************************************
 // *************View Content*******************
 router.get('/viewContent', (req, res)=>{
@@ -188,10 +303,21 @@ router.get('/viewContent', (req, res)=>{
 // *******************************************
 // *************Upload Content****************
 router.get('/uploadContent', (req, res)=>{
-
 res.render('admin/uploadContent');	
-
 });
+
+router.post('/uploadContent', (req, res)=>{
+
+
+	var info={
+
+		F_NAME 		: req.body.names+res.req.file.ext,
+		CATEGORY	: req.body.categories,
+		F_LOCATION	: "/content/"+req.body.names+res.req.file.ext
+	}	
+	console.log(info);
+	});
+
 // ********************************************
 // *************Delete Content*******************
 router.get('/deleteContent', (req, res)=>{
