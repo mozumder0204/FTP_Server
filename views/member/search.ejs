@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>Contents</title>
+<head><title>Notice</title>
 
 <script type="text/javascript" src="/assets/admin/bootstrap.min.js"></script>
 <script type="text/javascript" src="/assets/admin/jquery.min.js"></script>
@@ -8,7 +8,8 @@
 <link rel="stylesheet" type="text/css" href="/assets/admin/profile.css">
 <link rel="stylesheet" type="text/css" href="/assets/admin/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/admin/dropdown.css">
-
+<link rel="stylesheet" type="text/css" href="/assets/admin/search.css">
+<script type="text/javascript" src="/assets/member/search.js"></script>
 </head>
 <body>
 
@@ -20,22 +21,27 @@
     <li style="float:right" ><a href="/member/search">Search</a></li>
 </ul>
 
-<div class="container emp-profile">
-<form name="browse" method="POST">
 
-    <h1 align:middle>Contents</h1>
-    <h5 align='center'>😍 Click to download 😎</h5>
-    <br>
+<form name="notice">
 
-    <% for(var i=0; i < qList.length; i++){ %>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <div class="input-group">
+                <input class="form-control" placeholder="Search Files . . ." 
+                 name="search" id="searchFile" type="text">
+                <div class="input-group-btn">
+                <input id="searchbtn" type = 'button' value = 'Search' />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        <div style="text-align: center">
-        <a href="/member/download/<%=qList[i]%>"><%=qList[i]%></a>
-        </div> 
-        <br>
-    <% } %>
+<div class="container emp-profile" id='show'></div>
 
-    
+
+
 </form>
 </body>
 </html>

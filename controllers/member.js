@@ -59,10 +59,24 @@ router.get('/download/:name', (req, res)=>{
     var filestream = fs.createReadStream(file);
     filestream.pipe(res);
 });
-
-
-
 //********************************************
+// *************Search************************
+router.get('/search', (req, res)=>{
+    res.render('member/search');
+});	
+
+router.get('/searchFile/:name', (req, res)=>{
+
+    fs.readdir('./data/req.params.name', function(err, items) {
+      console.log(items);
+		Object.assign({}, items);
+		var item={
+			qList:items
+        }
+		res.send(item);
+	});
+    
+});	
 
 
 
