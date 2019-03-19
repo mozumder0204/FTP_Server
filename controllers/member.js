@@ -67,13 +67,18 @@ router.get('/search', (req, res)=>{
 
 router.get('/searchFile/:name', (req, res)=>{
 
-    fs.readdir('./data/req.params.name', function(err, items) {
-      console.log(items);
+    fs.readdir('./data/', function(err, items) {
 		Object.assign({}, items);
-		var item={
-			qList:items
+
+        for(var i=0; i<items.length; i++){
+            if(items[i] == req.params.name){
+                res.send(items[i]);
+            }
+            else{
+                res.send();
+            }
         }
-		res.send(item);
+
 	});
     
 });	
