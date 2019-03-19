@@ -68,11 +68,19 @@ router.get('/search', (req, res)=>{
 router.get('/searchFile/:name', (req, res)=>{
 
     fs.readdir('./data/', function(err, items) {
-		Object.assign({}, items);
+        Object.assign({}, items);
 
+        var result={}
+        
         for(var i=0; i<items.length; i++){
-            if(items[i] == req.params.name){
-                res.send(items[i]);
+
+            var nameCheck = items[i].split('.').slice(0, -1).join('.')
+            
+
+            if(nameCheck == req.params.name){
+                result.file = items[i]
+                console.log(result);
+                res.send(result);
             }
             else{
                 res.send();

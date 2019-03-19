@@ -13,7 +13,7 @@ $(document).ready(()=>{
                 for(var i=0; i < response.length; i++){
                     views.html(
                     '<div style="text-align: center">\
-                            <a href="/member/download/'+response+'">'+response+'</a>\
+                            <a href="/member/download/'+response[i]+'">'+response[i]+'</a>\
                             </div> \
                             <br>\
                             ');
