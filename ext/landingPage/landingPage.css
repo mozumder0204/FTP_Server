@@ -34,7 +34,7 @@ body{
 #container22{
   text-align: center;
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 30%;
   transform: translate(-50%, -50%);
   color: white;
@@ -43,8 +43,8 @@ body{
 #container222{
   text-align: center;
   position: absolute;
-  top: 65%;
-  left: 50%;
+  top: 75%;
+  left: 46%;
   transform: translate(-50%, -50%);
   color: white;
 
